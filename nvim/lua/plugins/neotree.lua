@@ -8,7 +8,7 @@ return {
     },
     config = function()
         local neotree = require("neo-tree")
-        vim.keymap.set('n', 'e', ':Neotree left')
+        vim.keymap.set('n', '<C-b>', ':Neotree toggle left<CR>', { noremap = true, silent = true })
         vim.keymap.set('n', 'o', ':Neotree float git_status')
         neotree.setup({
             filesystem = {
@@ -21,8 +21,15 @@ return {
                     show_hidden_count = true,
                     hide_dotfiles = false,
                     hide_gitignored = false,
-                }
-            }
+                },
+				window = {
+      				mappings = {
+        				["<CR>"] = "open_tabnew", -- по Enter открываем во вкладке
+        				["o"] = "open",           -- если хочешь оставить обычное открытие
+        				["t"] = "open_tabnew",    -- альтернатива на t
+      				}
+            	}
+			}
         })
     end
 }
